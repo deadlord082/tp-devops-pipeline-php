@@ -1,0 +1,35 @@
+name: build and deploy Portfolio application
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  registry: ghcr.io
+  image_name: ${{ github.repository }}
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+    secrets: inherit
+
+  build:
+    uses: ./.github/workflows/build.yml
+    needs: [test]
+    secrets: inherit
+    permissions:
+      contents: read
+      packages: write
+
+  deploy:
+    uses: ./.github/workflows/deploy.yml
+    needs: [build]
+    secrets: inherit
+    permissions:
+      contents: read
+      packages: read
