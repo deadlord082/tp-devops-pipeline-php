@@ -34,4 +34,4 @@ jobs:
       contents: read
       packages: read
     with:
-      app_image: ${{ env.registry }}/${{ env.image_name }}:latest
+      app_image: ${{ 'ghcr.io/' + github.repository + ':latest' }}
