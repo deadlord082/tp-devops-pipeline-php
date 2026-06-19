@@ -2,6 +2,11 @@ name: Deploy to production
 
 on:
   workflow_call:
+    inputs:
+      app_image:
+        description: 'Full image reference (ghcr.io/owner/repo:tag)'
+        required: true
+        type: string
 
 jobs:
   deploy:
@@ -16,7 +21,16 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
             cd /home/ubuntu/apps/projects/pipeline-php
+            # ensure .env exists and set/replace APP_IMAGE without overwriting other vars
+            touch .env
+            APP_IMAGE_VALUE="${{ inputs.app_image }}"
+            if grep -q '^APP_IMAGE=' .env; then
+              sed -i "s|^APP_IMAGE=.*|APP_IMAGE=${APP_IMAGE_VALUE}|" .env
+            else
+              echo "APP_IMAGE=${APP_IMAGE_VALUE}" >> .env
+            fi
             docker compose pull
             docker compose down
             docker compose up -d --remove-orphans

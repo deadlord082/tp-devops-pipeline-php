@@ -33,3 +33,5 @@ jobs:
     permissions:
       contents: read
       packages: read
+    with:
+      app_image: ${{ env.registry }}/${{ env.image_name }}:latest
