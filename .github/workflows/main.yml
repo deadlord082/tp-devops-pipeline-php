@@ -34,4 +34,4 @@ jobs:
       contents: read
       packages: read
     with:
-      app_image: ${{ 'ghcr.io/' + github.repository + ':latest' }}
+      app_image: ${{ format('ghcr.io/{0}:latest', github.repository) }}
