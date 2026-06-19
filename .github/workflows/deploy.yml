@@ -26,14 +26,14 @@ jobs:
           script: |
             mkdir -p /home/ubuntu/apps/projects/pipeline-php/docker/nginx
 
-      - name: Upload Nginx default.conf to VPS
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "docker/nginx/default.conf"
-          target: "/home/ubuntu/apps/projects/pipeline-php/docker/nginx/default.conf"
+      # - name: Upload Nginx default.conf to VPS
+      #   uses: appleboy/scp-action@v0.1.4
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     username: ${{ secrets.SSH_USER }}
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     source: "docker/nginx/default.conf"
+      #     target: "/home/ubuntu/apps/projects/pipeline-php/docker/nginx/default.conf"
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.2.5
