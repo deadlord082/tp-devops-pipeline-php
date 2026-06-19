@@ -9,7 +9,7 @@ services:
     env_file: .env
     restart: unless-stopped
     ports:
-      - "127.0.0.1:${APP_PORT}:80"   # exposé uniquement sur l'hôte (Nginx Proxy Manager forward)
+      - "127.0.0.1:${APP_PORT}:82"   # exposé uniquement sur l'hôte (Nginx Proxy Manager forward)
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
