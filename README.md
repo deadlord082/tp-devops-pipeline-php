@@ -116,7 +116,7 @@ de tests de votre pipeline.
 
 ### 🔬 Exercice d'observation : prouvez l'isolation réseau
 
-Une bonne partie de la note porte sur la **compréhension du réseau** (section 5). Vérifiez par
+La **compréhension du réseau** (section 4) est au cœur de ce TP. Vérifiez par
 vous-même que `db` et `cache` sont **bien isolés** :
 
 ```bash
@@ -140,7 +140,7 @@ Si ces résultats vous surprennent, relisez la section suivante : c'est exacteme
 ## 4. Architecture & la leçon réseau 🕸️
 
 L'application est découpée en **4 services** répartis sur **2 réseaux Docker**. Comprendre cette
-topologie est un **objectif noté** — et vous devrez la **reproduire à l'identique** dans votre
+topologie est **au cœur du TP** — et vous devrez la **reproduire à l'identique** dans votre
 compose de production.
 
 ```
@@ -257,7 +257,7 @@ actions, l'ordre des jobs et les conditions.
 
 ## 7. Bonus optionnels 🌟
 
-Pour aller plus loin (points supplémentaires, section barème) :
+Pour aller plus loin — **non requis pour le socle**, mais ces extensions renforcent votre pipeline :
 
 | Bonus | Apport |
 |---|---|
@@ -325,24 +325,7 @@ Dans **Settings → Secrets and variables → Actions** de votre repo :
 
 ---
 
-## 9. Barème indicatif 📊
-
-> **Barème indicatif sur /20 — ajustable par le formateur.** L'essentiel des points est sur le
-> **pipeline qui marche** et la **sécurité** ; les bonus viennent en plus.
-
-| Bloc | Points | Détail |
-|---|---:|---|
-| **Pipeline fonctionnel (EX1–EX6)** | **11** | trigger push/PR (1) · tests en CI bloquants (2) · build image (1) · push GHCR tagué (2) · scan Trivy en gate (3) · deploy SSH + app en ligne (2) |
-| **Sécurité & secrets (EX7 + isolation réseau)** | **4** | aucun secret committé (2) · `db`/`cache` non exposés en prod, topologie 2 réseaux respectée (2) |
-| **Qualité & documentation** | **3** | pipeline lisible / fail-fast respecté / deploy limité à `main` (2) · justification des choix, ex. seuil Trivy (1) |
-| **Bonus** | **+3 max** | jusqu'à 3 points au-dessus du socle (readiness, cache layers, matrice, staging, badge, concurrency) |
-
-*(Total socle : /18 + 2 de marge qualité, bonus jusqu'à +3 — le formateur fixe la pondération
-finale.)*
-
----
-
-## 10. Pistes & ressources 🧭
+## 9. Pistes & ressources 🧭
 
 Voici **quoi chercher** (et non la conf clé en main). Lisez les **docs officielles** :
 
@@ -367,7 +350,7 @@ Voici **quoi chercher** (et non la conf clé en main). Lisez les **docs officiel
 
 ---
 
-## 11. Livrable & évaluation 📦
+## 10. Livrable & critères de réussite 📦
 
 **Ce qu'on attend de vous :**
 
@@ -381,7 +364,7 @@ Voici **quoi chercher** (et non la conf clé en main). Lisez les **docs officiel
 - le **lien de votre repo GitHub** (avec le workflow et le compose de prod que vous avez écrits) ;
 - l'**URL déployée** de votre application.
 
-**Critères d'évaluation (récapitulatif) :**
+**Critères de réussite (auto-vérification) :**
 
 - [ ] Le workflow se déclenche sur `push` **et** `pull request` (EX1).
 - [ ] Les **tests** s'exécutent et **bloquent** en cas d'échec (EX2).
@@ -394,7 +377,7 @@ Voici **quoi chercher** (et non la conf clé en main). Lisez les **docs officiel
 
 ---
 
-## 12. Bonnes pratiques & garde-fous 🧱
+## 11. Bonnes pratiques & garde-fous 🧱
 
 - 🔑 **Jamais de secret en clair.** Mots de passe, clés, tokens → **GitHub Actions secrets** + fichier
   `.env` non committé (modelé sur `.env.example`). Le `.gitignore` ignore déjà `.env` : ne le forcez
